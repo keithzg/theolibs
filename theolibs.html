@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Theology Mad Libs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+  </head>
+
+  <body>
+
+  <SCRIPT LANGUAGE="JavaScript">
+
+     var text = '{ "scripts" : [' +
+'{ "text":"Close to them clings one moving in seclusion, like a man\'s $1, like a spear carried rearward, <br>Well grasped, bright, decked with gold there is Vāk also, like to a courtly, eloquent $2, among them." , "one":"noun", "two":"pronoun" },' +
+'{ "text":"WITH wisdom I present these lively praises of $1 dweller on the bank of Sindhu; For he, unconquered King, desiring glory, hath furnished me a thousand $2." , "one":"name", "two":"plural noun"}, ' +
+'{ "text":"And $1 $2 many more words unto the $3, which are not $4 in this $5." , "one":"name", "two":"past verb", "three":"plural noun", "four":"verb", "five":"media"}, ' +
+'{ "text":"If you ask how much do I $1,<br> I\'ll tell you that I $1 it all.<br> This morning, you and I <br>and all $2 <br>are $5 into the marvelous $3 <br>of $4." , "one":"verb", "two":"collective noun", "three":"adjective", "four":"state of being", "five":"present continuous verb"}, ' +
+'{ "text":"No $1 offering, which ye shall bring unto the $2, shall be made with $3: for ye shall burn no $3, nor any $4, in any offering of the $2 made by $5." , "one":"category of food", "two":"title", "three":"ingredient", "four":"ingredient", "five":"element"}, ' +
+'{ "text":"I urge you to beware the $2 of pride --the $2 of blithely declaring yourselves above it all and label both sides equally at fault, to ignore the facts of history and the $1 impulses of an $3 empire, to simply call the arms race a $5 misunderstanding and thereby remove yourself from the struggle between right and wrong and $4 and $3." , "one":"adjective", "two":"abstract noun", "three":"second abstract noun", "four":"opposite of second abstract noun", "five":"size"}, ' +
+'{ "text":"Jesus said, Those who seek should not stop seeking until they find. When they find, they will be $1. When they are $1, they will marvel, and will $2 over all. And after they have $2 they will rest." , "one":"adjective", "two":"verb" } ]}';
+     
+     function randomize(){
+        var obj = JSON.parse(text);
+        randomnumber = Math.floor(Math.random() * 6)
+        formtext = "<form>"
+        formtext += "<br>" + obj.scripts[randomnumber].one + ": <input id=one></input>";
+        formtext += "<br>" + obj.scripts[randomnumber].two + ": <input id=two></input>";
+        if (typeof obj.scripts[randomnumber].three !== 'undefined') {
+            formtext += "<br>" + obj.scripts[randomnumber].three + ": <input id=three></input>";
+        }
+        if (typeof obj.scripts[randomnumber].four !== 'undefined') {
+            formtext += "<br>" + obj.scripts[randomnumber].four + ": <input id=four></input>";
+        }
+        if (typeof obj.scripts[randomnumber].five !== 'undefined') {
+            formtext += "<br>" + obj.scripts[randomnumber].five + ": <input id=five></input>";
+        }
+        formtext += "<br>" + "<button type=button onclick='showresults(randomnumber)'>Show Results</button></form>";
+        document.getElementById('choices').innerHTML = formtext;
+     }
+ 
+     function showresults(randomnumber){
+        
+        var obj = JSON.parse(text);
+        outtext = obj.scripts[randomnumber].text;
+        outtext = outtext.replace(/\$1/g,document.getElementById('one').value);
+        outtext = outtext.replace(/\$2/g,document.getElementById('two').value);
+        if (typeof obj.scripts[randomnumber].three !== 'undefined') {
+            outtext = outtext.replace(/\$3/g,document.getElementById('three').value);
+        }
+        if (typeof obj.scripts[randomnumber].four !== 'undefined') {
+            outtext = outtext.replace(/\$4/g,document.getElementById('four').value);
+        }
+        if (typeof obj.scripts[randomnumber].five !== 'undefined') {
+            outtext = outtext.replace(/\$5/g,document.getElementById('five').value);
+        }
+//         outtext += document.getElementById('one').innerHTML;
+        document.getElementById('results').innerHTML = outtext;
+     }
+</script>
+  
+   
+
+    <div class="container">
+
+        <p><input type='button' class="btn btn-xlarge btn-warning" onclick='randomize()' value="Randomize!"/></p>
+
+        <span id='choices'>?</span>
+        <p></p>
+        <span id="results"></span>
+
+    </div> <!-- /container -->
+
+   
+  </body>
+</html>
